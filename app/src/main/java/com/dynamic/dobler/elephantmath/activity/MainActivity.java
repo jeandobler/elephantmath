@@ -1,8 +1,10 @@
-package com.dynamic.dobler.elephantmath;
+package com.dynamic.dobler.elephantmath.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.dynamic.dobler.elephantmath.R;
 
 public class MainActivity extends AppCompatActivity {
 
