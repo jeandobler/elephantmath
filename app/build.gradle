@@ -39,8 +39,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha02'
     // alternatively, just LiveData
     implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0-alpha02'
-
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02'
+
+    implementation 'com.google.android.material:material:1.0.0'
 
     // Room
     implementation 'androidx.room:room-runtime:2.1.0-alpha04'
@@ -64,8 +65,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     //FIREBASE
-    implementation 'com.google.firebase:firebase-core:16.0.7'
-    implementation 'com.google.firebase:firebase-firestore:18.0.1'
+//    implementation 'com.google.firebase:firebase-core:16.0.7'
+//    implementation 'com.google.firebase:firebase-firestore:18.0.1'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 

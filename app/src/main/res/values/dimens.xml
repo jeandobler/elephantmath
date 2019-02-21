@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Textt-->
+    <dimen name="smalText">16sp</dimen>
+    <dimen name="normalText">14sp</dimen>
+
+
+    <!--Margin-->
+    <dimen name="containerMargin">8dp</dimen>
+    <dimen name="componentMargin">4dp</dimen>
+</resources>
