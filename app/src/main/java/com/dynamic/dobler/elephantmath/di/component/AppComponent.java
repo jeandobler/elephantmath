@@ -2,6 +2,7 @@ package com.dynamic.dobler.elephantmath.di.component;
 
 import android.app.Application;
 
+import com.dynamic.dobler.elephantmath.App;
 import com.dynamic.dobler.elephantmath.di.module.ActivityModule;
 import com.dynamic.dobler.elephantmath.di.module.AppModule;
 
@@ -24,5 +25,5 @@ public interface AppComponent {
         AppComponent build();
     }
 
-//    void inject(App app);
+    void inject(App app);
 }

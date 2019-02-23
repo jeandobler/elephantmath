@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Elephant Math</string>
+    <string name="main_challenge_subtitle">Challenge</string>
+    <string name="main_challenge_title">X</string>
+
+    <string name="main_ranking_title">Ranking</string>
+    <string name="settings">Settings</string>
+
 </resources>

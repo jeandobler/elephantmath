@@ -4,17 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/main2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Main2"
 
-        android:textSize="@dimen/smalText"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="297dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_challenge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/containerMargin"
+        android:layout_marginTop="@dimen/containerMargin"
+        android:layout_marginEnd="@dimen/containerMargin"
+        android:background="@color/primaryLightColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_main_challenge_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_view_size"
+                android:background="@color/primaryLightColor"
+                android:fontFamily="@font/indieflower"
+                android:gravity="center"
+                android:paddingLeft="@dimen/componentMargin"
+                android:paddingTop="@dimen/componentMargin"
+                android:paddingRight="@dimen/componentMargin"
+                android:text="@string/main_challenge_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/giantText" />
+
+            <TextView
+                android:id="@+id/tv_main_challenge_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_main_challenge_title"
+                android:gravity="center"
+                android:paddingLeft="@dimen/componentMargin"
+                android:paddingTop="@dimen/componentMargin"
+                android:paddingRight="@dimen/componentMargin"
+                android:paddingBottom="@dimen/componentMargin"
+                android:text="@string/main_challenge_subtitle"
+                android:textSize="@dimen/title5Text" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_ranking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/containerMargin"
+        android:layout_marginTop="@dimen/containerMargin"
+        android:layout_marginEnd="@dimen/containerMargin"
+        android:background="@color/primaryLightColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_main_challenge">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_main_ranking_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/card_view_size"
+                android:background="@color/primaryLightColor"
+                android:contentDescription="@string/main_ranking_title"
+                android:gravity="center"
+                android:paddingLeft="@dimen/componentMargin"
+                android:paddingTop="@dimen/greatPadding"
+                android:paddingRight="@dimen/componentMargin"
+                android:paddingBottom="@dimen/greatPadding"
+                android:src="@drawable/trophy" />
+
+            <TextView
+                android:id="@+id/tv_main_ranking_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_main_ranking_title"
+                android:gravity="center"
+                android:paddingLeft="@dimen/componentMargin"
+                android:paddingTop="@dimen/componentMargin"
+                android:paddingRight="@dimen/componentMargin"
+                android:paddingBottom="@dimen/componentMargin"
+                android:text="@string/main_ranking_title"
+                android:textSize="@dimen/title5Text" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

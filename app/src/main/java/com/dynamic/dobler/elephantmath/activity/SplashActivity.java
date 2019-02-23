@@ -64,7 +64,10 @@ public class SplashActivity extends BaseActivity {
         if (account != null) {
             Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
+
         }
+
+
 
     }
 

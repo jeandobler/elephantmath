@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "728928955609-jsue44gs0k7paj12gfl5tp61mse6hmk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dynamic.dobler.elephantmath",
+            "certificate_hash": "8f3748d07ce22827c5067749c3635c368b69bc1a"
+          }
+        },
+        {
           "client_id": "728928955609-3b2t3mr1md012cdrkkmbf7lnhh46ahq1.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Textt-->
-    <dimen name="smalText">16sp</dimen>
-    <dimen name="normalText">14sp</dimen>
+    <!--Text-->
+    <dimen name="normalText">16sp</dimen>
+    <dimen name="smalText">14sp</dimen>
+    <dimen name="giantText">120sp</dimen>
+    <dimen name="title5Text">24sp</dimen>
 
 
     <!--Margin-->
     <dimen name="containerMargin">8dp</dimen>
     <dimen name="componentMargin">4dp</dimen>
+    <dimen name="greatPadding">32dp</dimen>
+    <dimen name="card_view_size">200dp</dimen>
 </resources>
