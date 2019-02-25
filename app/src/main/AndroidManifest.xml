@@ -9,7 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BaseActivity"></activity>
+        <activity android:name=".activity.Challenge"></activity>
+        <activity
+            android:name=".activity.ranking.ItemListActivity"
+            android:label="@string/title_item_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ranking.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".activity.ranking.ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dynamic.dobler.elephantmath.activity.ranking.ItemListActivity" />
+        </activity>
+        <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

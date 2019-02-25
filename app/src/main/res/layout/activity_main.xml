@@ -16,6 +16,9 @@
         android:layout_marginTop="@dimen/containerMargin"
         android:layout_marginEnd="@dimen/containerMargin"
         android:background="@color/primaryLightColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -64,6 +67,9 @@
         android:layout_marginTop="@dimen/containerMargin"
         android:layout_marginEnd="@dimen/containerMargin"
         android:background="@color/primaryLightColor"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_main_challenge">
