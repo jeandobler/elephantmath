@@ -18,6 +18,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.cv_main_ranking)
     CardView mCvRanking;
 
+    @BindView(R.id.cv_main_challenge)
+    CardView mCvChallenge;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,23 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        mCvChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openChallenge();
+            }
+        });
+
     }
 
     protected void openRanking() {
         Intent rankingIntent = new Intent(this, ItemListActivity.class);
         startActivity(rankingIntent);
+    }
+
+    protected void openChallenge() {
+        Intent challengeIntent = new Intent(this, ChallengeActivity.class);
+        startActivity(challengeIntent);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

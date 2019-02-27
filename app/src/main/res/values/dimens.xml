@@ -3,6 +3,9 @@
     <!--Text-->
     <dimen name="normalText">16sp</dimen>
     <dimen name="smalText">14sp</dimen>
+    <dimen name="editMathText">24sp</dimen>
+
+    <dimen name="giantMathText">80sp</dimen>
     <dimen name="giantText">120sp</dimen>
     <dimen name="title5Text">24sp</dimen>
 
