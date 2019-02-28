@@ -1,18 +1,16 @@
 package com.dynamic.dobler.elephantmath.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class BaseActivity extends AppCompatActivity {
 
 
-    private String mGoogleId;
+    protected int mGoogleId;
 
     @Override
     protected void onStart() {
@@ -22,13 +20,13 @@ public class BaseActivity extends AppCompatActivity {
         updateUI(account);
     }
 
-        protected void updateUI(GoogleSignInAccount account) {
-            if (account == null) {
-                Intent splashIntent = new Intent(this, SplashActivity.class);
-                startActivity(splashIntent );
-            }else {
-                mGoogleId = account.getId();
-            }
+    protected void updateUI(GoogleSignInAccount account) {
+        if (account == null) {
+            Intent splashIntent = new Intent(this, SplashActivity.class);
+            startActivity(splashIntent);
+        } else {
+            mGoogleId = Integer.parseInt(account.getId());
         }
+    }
 
 }

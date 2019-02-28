@@ -2,20 +2,28 @@ package com.dynamic.dobler.elephantmath.activity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.dynamic.dobler.elephantmath.R;
+import com.dynamic.dobler.elephantmath.database.entity.Ranking;
+import com.dynamic.dobler.elephantmath.database.entity.RankingItem;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChallengeActivity extends AppCompatActivity {
+public class ChallengeActivity extends BaseActivity {
 
     @BindView(R.id.pb_challenge_timer)
     ProgressBar mPbChallengeTimer;
-    int total = 0;
-    CountDownTimer cdt;
+
+    int progressbarCount = 0;
+    int lives = 3;
+    Ranking mRanking;
+    RankingItem mRankingItem;
+    private CountDownTimer mCountDownTimer;
 
 
     @Override
@@ -23,6 +31,8 @@ public class ChallengeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
 
+        Date date = new Date();
+        mRanking = new Ranking(null, this.mGoogleId, date, 0);
         ButterKnife.bind(this);
 
         progressbarTimer();
@@ -31,21 +41,24 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     private void progressbarTimer() {
-        mPbChallengeTimer.setProgress(total);
-        int oneMin = 1 * 60 * 1000; // 1 minute in milli seconds
+        mPbChallengeTimer.setProgress(progressbarCount);
+        mCountDownTimer = new CountDownTimer(10000, 100) {
 
-        /** CountDownTimer starts with 1 minutes and every onTick is 1 second */
-        cdt = new CountDownTimer(oneMin, 1000) {
-
+            @Override
             public void onTick(long millisUntilFinished) {
+                Log.e("Log_tag", "Tick of Progress " + progressbarCount + " " + millisUntilFinished);
+                progressbarCount++;
+                mPbChallengeTimer.setProgress(progressbarCount);
 
-                total = (int) ((millisUntilFinished / 60) * 100);
-                mPbChallengeTimer.setProgress(total);
             }
 
+            @Override
             public void onFinish() {
-                // DO something when 1 minute is up
+                //Do what you want
+                progressbarCount++;
+                mPbChallengeTimer.setProgress(100);
             }
-        }.start();
+        };
+        mCountDownTimer.start();
     }
 }
