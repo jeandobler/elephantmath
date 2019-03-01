@@ -21,7 +21,7 @@ public class Ranking {
 
     @SerializedName("googleId")
     @Expose
-    private int googleId;
+    private String googleId;
 
     @SerializedName("createdAt")
     @Expose
@@ -40,11 +40,11 @@ public class Ranking {
         this.id = id;
     }
 
-    public int getGoogleId() {
+    public String getGoogleId() {
         return googleId;
     }
 
-    public void setGoogleId(int googleId) {
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 
@@ -64,7 +64,7 @@ public class Ranking {
         this.points = points;
     }
 
-    public Ranking(@NonNull String id, int googleId, Date createdAt, Integer points) {
+    public Ranking(@NonNull String id, String googleId, Date createdAt, Integer points) {
         this.id = id;
         this.googleId = googleId;
         this.createdAt = createdAt;

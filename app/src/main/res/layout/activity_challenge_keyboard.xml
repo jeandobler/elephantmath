@@ -5,7 +5,7 @@
     android:padding="8dp">
 
     <EditText
-        android:id="@+id/math_field"
+        android:id="@+id/et_challenge_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -38,7 +38,7 @@ public class KeyboardView extends FrameLayout implements View.OnClickListener {
     }
 
     private void initViews() {
-        mMathField = $(R.id.math_field);
+        mMathField = $(R.id.et_challenge_keyboard);
         $(R.id.t9_key_0).setOnClickListener(this);
         $(R.id.t9_key_1).setOnClickListener(this);
         $(R.id.t9_key_2).setOnClickListener(this);

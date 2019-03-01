@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaseActivity extends AppCompatActivity {
 
 
-    protected int mGoogleId;
+    protected String mGoogleId;
 
     @Override
     protected void onStart() {
@@ -25,7 +25,7 @@ public class BaseActivity extends AppCompatActivity {
             Intent splashIntent = new Intent(this, SplashActivity.class);
             startActivity(splashIntent);
         } else {
-            mGoogleId = Integer.parseInt(account.getId());
+            mGoogleId = account.getId();
         }
     }
 

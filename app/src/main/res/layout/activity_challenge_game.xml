@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
@@ -15,7 +13,7 @@
         android:id="@+id/iv_challenge_heart1"
         android:layout_width="36dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/heart"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +34,11 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/heart"
-        android:visibility="invisible"
-
         app:layout_constraintLeft_toRightOf="@id/iv_challenge_heart2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_challenge_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -52,8 +48,7 @@
         android:text="x15961"
         android:textColor="@color/white"
         android:textSize="@dimen/editMathText"
-        app:layout_constraintEnd_toEndOf="@+id/iv_challenge_heart3"
-        app:layout_constraintStart_toStartOf="@+id/iv_challenge_heart1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_challenge_heart2" />
 
 
@@ -62,17 +57,18 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:indeterminate="false"
         android:max="100"
         android:progress="1"
         android:progressDrawable="@drawable/circular_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
+        android:id="@+id/tv_challenge_problem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -83,8 +79,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/giantMathText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_challenge_level" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
