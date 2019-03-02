@@ -16,6 +16,7 @@ public class SplashActivity extends BaseActivity {
 
     private static final int RC_SIGN_IN = 901;
     private GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,10 @@ public class SplashActivity extends BaseActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            updateUI(account);
+            updateUI();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -60,13 +61,12 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    protected void updateUI(GoogleSignInAccount account) {
+    protected void updateUI() {
         if (account != null) {
             Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
 
         }
-
 
 
     }

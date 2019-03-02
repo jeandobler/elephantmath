@@ -1,45 +1,25 @@
 package com.dynamic.dobler.elephantmath.database.entity;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 
 @Entity
 public class RankingItem {
 
-    @PrimaryKey
-    @NonNull
-    @SerializedName("id")
-    @Expose
     private String id;
 
-    @SerializedName("rankingId")
-    @Expose
     private String rankingId;
 
-    @SerializedName("number1")
-    @Expose
     private int number1;
 
-    @SerializedName("number2")
-    @Expose
     private int number2;
 
-    @SerializedName("speed")
-    @Expose
     private float speed;
 
-    @SerializedName("is_correct")
-    @Expose
     private boolean isCorrect;
 
-    public RankingItem(@NonNull String id, String rankingId, int number1, int number2, float speed, boolean isCorrect) {
-        this.id = id;
-        this.rankingId = rankingId;
+    public RankingItem(int number1, int number2, float speed, boolean isCorrect) {
         this.number1 = number1;
         this.number2 = number2;
         this.speed = speed;

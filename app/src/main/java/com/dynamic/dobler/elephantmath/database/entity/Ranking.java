@@ -1,37 +1,33 @@
 package com.dynamic.dobler.elephantmath.database.entity;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 
 @Entity
 public class Ranking {
 
-    @PrimaryKey
-    @NonNull
-    @SerializedName("id")
-    @Expose
+
     private String id;
 
-    @SerializedName("googleId")
-    @Expose
-    private String googleId;
+    private String email;
 
-    @SerializedName("createdAt")
-    @Expose
     private Date createdAt;
 
-    @SerializedName("points")
-    @Expose
     private Integer points;
 
-    @NonNull
+    private List<RankingItem> rankingItems;
+
+    public Ranking(String email, Date createdAt, Integer points) {
+
+        this.email = email;
+        this.createdAt = createdAt;
+        this.points = points;
+    }
+
     public String getId() {
         return id;
     }
@@ -40,12 +36,12 @@ public class Ranking {
         this.id = id;
     }
 
-    public String getGoogleId() {
-        return googleId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreatedAt() {
@@ -64,10 +60,11 @@ public class Ranking {
         this.points = points;
     }
 
-    public Ranking(@NonNull String id, String googleId, Date createdAt, Integer points) {
-        this.id = id;
-        this.googleId = googleId;
-        this.createdAt = createdAt;
-        this.points = points;
+    public List<RankingItem> getRankingItems() {
+        return rankingItems;
+    }
+
+    public void setRankingItems(List<RankingItem> rankingItems) {
+        this.rankingItems = rankingItems;
     }
 }

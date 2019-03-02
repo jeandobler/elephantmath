@@ -1,81 +1,168 @@
 package com.dynamic.dobler.elephantmath.activity.ranking;
 
-import android.content.Context;
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
-
+import com.dynamic.dobler.elephantmath.activity.BaseActivity;
 import com.dynamic.dobler.elephantmath.activity.ranking.dummy.DummyContent;
+import com.dynamic.dobler.elephantmath.database.entity.Ranking;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.SnapshotParser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.appindexing.FirebaseAppIndex;
+import com.google.firebase.appindexing.Indexable;
+import com.google.firebase.appindexing.builders.Indexables;
+import com.google.firebase.appindexing.builders.PersonBuilder;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-/**
- * An activity representing a list of Items. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link ItemDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
-public class ItemListActivity extends AppCompatActivity {
+public class ItemListActivity extends BaseActivity {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
     private boolean mTwoPane;
+    private DatabaseReference mFirebaseDatabaseReference;
+    private FirebaseRecyclerAdapter<Ranking, RankingViewHolder>
+            mFirebaseAdapter;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.rv_ranking_list)
+    RecyclerView mRvRanking;
+    private LinearLayoutManager mLinearLayoutManager;
+
+
+    public static class RankingViewHolder extends RecyclerView.ViewHolder {
+        TextView mContent;
+        TextView mText;
+
+
+        public RankingViewHolder(View v) {
+            super(v);
+            mContent = (TextView) itemView.findViewById(R.id.id_text);
+            mText = (TextView) itemView.findViewById(R.id.content);
+        }
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setStackFromEnd(true);
 
         if (findViewById(R.id.item_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.item_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        assert mRvRanking != null;
+        setupRecyclerView(  mRvRanking);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        SnapshotParser<Ranking> parser = new SnapshotParser<Ranking>() {
+            @Override
+            public Ranking parseSnapshot(DataSnapshot dataSnapshot) {
+                Ranking ranking = dataSnapshot.getValue(Ranking.class);
+                if (ranking != null) {
+                    ranking.setId(dataSnapshot.getKey());
+                }
+                return ranking;
+            }
+        };
+
+        DatabaseReference messagesRef = mFirebaseDatabaseReference.child("ranking");
+
+        FirebaseRecyclerOptions<Ranking> options =
+                new FirebaseRecyclerOptions.Builder<Ranking>()
+                        .setQuery(messagesRef, parser)
+                        .build();
+
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(options) {
+
+            @Override
+            public RankingViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+                LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+                return new RankingViewHolder(inflater.inflate(R.layout.item_list_content, viewGroup, false));
+            }
+
+            @Override
+            protected void onBindViewHolder(final RankingViewHolder viewHolder,
+                                            int position,
+                                            Ranking ranking) {
+
+                Log.e("Error", "asd");
+                if (ranking.getPoints() != null) {
+                    viewHolder.mContent.setText(ranking.getPoints());
+                    viewHolder.mContent.setText(ranking.getEmail());
+                } else {
+                }
+
+
+                // log a view action on it
+//                FirebaseUserActions.getInstance().end(getMessageViewAction(ranking));
+            }
+        };
+
+
+
+
+        mRvRanking.setLayoutManager(mLinearLayoutManager);
+        mRvRanking.setAdapter(mFirebaseAdapter);
+
     }
 
+//    private Indexable getMessageIndexable(FriendlyMessage friendlyMessage) {
+//        PersonBuilder sender = Indexables.personBuilder()
+//                .setIsSelf(mUsername.equals(friendlyMessage.getName()))
+//                .setName(friendlyMessage.getName())
+//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId() + "/sender"));
+//
+//        PersonBuilder recipient = Indexables.personBuilder()
+//                .setName(mUsername)
+//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId() + "/recipient"));
+//
+//        Indexable messageToIndex = Indexables.messageBuilder()
+//                .setName(friendlyMessage.getText())
+//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId()))
+//                .setSender(sender)
+//                .setRecipient(recipient)
+//                .build();
+//
+//        return messageToIndex;
+//    }
+
+
+/*
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -142,6 +229,11 @@ public class ItemListActivity extends AppCompatActivity {
                 mIdView = (TextView) view.findViewById(R.id.id_text);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
+
         }
     }
+
+
+*/
+
 }

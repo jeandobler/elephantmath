@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.dynamic.dobler.elephantmath.R;
 import com.dynamic.dobler.elephantmath.database.entity.Ranking;
 import com.dynamic.dobler.elephantmath.database.entity.RankingItem;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,21 +61,54 @@ public class ChallengeActivity extends BaseActivity {
     private int mResult;
     private CountDownTimer mCountDownTimer;
     private MediaPlayer mp;
-
+    private DatabaseReference mFirebaseDatabaseReference;
+//    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>
+//            mFirebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
+        ButterKnife.bind(this);
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        prepareDatabase();
+        startLevel();
+        observeChallengeEditText();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        endGame();
+    }
+
+    @Override
+    public void onBackPressed() {
+        endGame();
+        super.onBackPressed();
+    }
+
+    void prepareDatabase() {
 
         Date date = new Date();
-        mRanking = new Ranking("asd", this.mGoogleId, date, 0);
+        Log.e(this.mGoogleId,this.mGoogleId);
+        mRanking = new Ranking(this.mGoogleId, date, 0);
         mRankingItems = new ArrayList<RankingItem>();
 
-        ButterKnife.bind(this);
 
-        startLevel();
+    }
 
+    void observeChallengeEditText() {
         mEtKeyboard.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -103,21 +139,23 @@ public class ChallengeActivity extends BaseActivity {
             }
 
         });
-
-
     }
 
     private void rankingAddItem(boolean isCorrect) {
 
-        if (isCorrect) {
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.level_up);
-
-        } else {
-            mp = MediaPlayer.create(getApplicationContext(), R.raw.mktoasty);
-        }
+        mp = MediaPlayer.create(getApplicationContext(), isCorrect ? R.raw.level_up : R.raw.mktoasty);
 
         mp.start();
-        RankingItem newItem = new RankingItem("item" + (mPoints + 1), "asd", mNumber1, mNumber2, (float) progressbarCount / 10, isCorrect);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+
+            }
+
+            ;
+        });
+
+        RankingItem newItem = new RankingItem(mNumber1, mNumber2, (float) progressbarCount / 10, isCorrect);
 
         mRankingItems.add(newItem);
     }
@@ -141,7 +179,16 @@ public class ChallengeActivity extends BaseActivity {
 
 
     private void endGame() {
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
         mTvProblem.setText("u Loose");
+        mRanking.setRankingItems(mRankingItems);
+        mRanking.setPoints(mPoints);
+        mFirebaseDatabaseReference.child("ranking")
+                .push().setValue(mRanking);
+
+
     }
 
     private void checkLives() {
