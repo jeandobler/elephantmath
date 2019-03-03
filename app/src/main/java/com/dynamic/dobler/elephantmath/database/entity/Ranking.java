@@ -21,6 +21,11 @@ public class Ranking {
 
     private List<RankingItem> rankingItems;
 
+
+    public Ranking() {
+
+    }
+
     public Ranking(String email, Date createdAt, Integer points) {
 
         this.email = email;

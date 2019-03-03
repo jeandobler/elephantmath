@@ -1,34 +1,26 @@
 package com.dynamic.dobler.elephantmath.activity.ranking;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
 import com.dynamic.dobler.elephantmath.activity.BaseActivity;
-import com.dynamic.dobler.elephantmath.activity.ranking.dummy.DummyContent;
 import com.dynamic.dobler.elephantmath.database.entity.Ranking;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.appindexing.FirebaseAppIndex;
-import com.google.firebase.appindexing.Indexable;
-import com.google.firebase.appindexing.builders.Indexables;
-import com.google.firebase.appindexing.builders.PersonBuilder;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,32 +29,18 @@ import butterknife.ButterKnife;
 
 public class ItemListActivity extends BaseActivity {
 
-    private boolean mTwoPane;
-    private DatabaseReference mFirebaseDatabaseReference;
-    private FirebaseRecyclerAdapter<Ranking, RankingViewHolder>
-            mFirebaseAdapter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.rv_ranking_list)
     RecyclerView mRvRanking;
+
+
+    private boolean mTwoPane;
+    private DatabaseReference mFirebaseDatabaseReference;
+    private FirebaseRecyclerAdapter<Ranking, RankingViewHolder>
+            mFirebaseAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-
-
-    public static class RankingViewHolder extends RecyclerView.ViewHolder {
-        TextView mContent;
-        TextView mText;
-
-
-        public RankingViewHolder(View v) {
-            super(v);
-            mContent = (TextView) itemView.findViewById(R.id.id_text);
-            mText = (TextView) itemView.findViewById(R.id.content);
-        }
-    }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,42 +49,80 @@ public class ItemListActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setTitle(getTitle());
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setStackFromEnd(true);
+
 
         if (findViewById(R.id.item_detail_container) != null) {
             mTwoPane = true;
         }
 
-        assert mRvRanking != null;
-        setupRecyclerView(  mRvRanking);
+        setupRecyclerView();
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+    private void setupRecyclerView() {
+
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRvRanking.setLayoutManager(mLinearLayoutManager);
+        mRvRanking.setHasFixedSize(true);
+
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        SnapshotParser<Ranking> parser = new SnapshotParser<Ranking>() {
-            @Override
-            public Ranking parseSnapshot(DataSnapshot dataSnapshot) {
-                Ranking ranking = dataSnapshot.getValue(Ranking.class);
-                if (ranking != null) {
-                    ranking.setId(dataSnapshot.getKey());
-                }
-                return ranking;
-            }
-        };
+        DatabaseReference query = mFirebaseDatabaseReference.child("ranking")
+                .orderByChild("email")
+                .equalTo("jedobler@gmail.com","email")
+                .getRef();
 
-        DatabaseReference messagesRef = mFirebaseDatabaseReference.child("ranking");
+
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+            // ...
+        });
+
+
+        SnapshotParser<Ranking> parser = dataSnapshot -> {
+            Ranking ranking = dataSnapshot.getValue(Ranking.class);
+            if (ranking != null) {
+                ranking.setId(dataSnapshot.getKey());
+            }
+            return ranking;
+        };
 
         FirebaseRecyclerOptions<Ranking> options =
                 new FirebaseRecyclerOptions.Builder<Ranking>()
-                        .setQuery(messagesRef, parser)
+                        .setQuery(query, parser)
                         .build();
 
+        Log.e("OptionReference", query.toString());
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(options) {
 
             @Override
@@ -120,11 +136,15 @@ public class ItemListActivity extends BaseActivity {
                                             int position,
                                             Ranking ranking) {
 
-                Log.e("Error", "asd");
+
+                Log.e("Ranking", ranking.toString());
+
+//                Log.e("Error", "asd");
                 if (ranking.getPoints() != null) {
-                    viewHolder.mContent.setText(ranking.getPoints());
+                    viewHolder.mText.setText(ranking.getPoints().toString());
                     viewHolder.mContent.setText(ranking.getEmail());
                 } else {
+
                 }
 
 
@@ -133,27 +153,47 @@ public class ItemListActivity extends BaseActivity {
             }
         };
 
-
-
-
-        mRvRanking.setLayoutManager(mLinearLayoutManager);
         mRvRanking.setAdapter(mFirebaseAdapter);
 
     }
 
-//    private Indexable getMessageIndexable(FriendlyMessage friendlyMessage) {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFirebaseAdapter.stopListening();
+    }
+
+    public static class RankingViewHolder extends RecyclerView.ViewHolder {
+        TextView mContent;
+        TextView mText;
+
+
+        public RankingViewHolder(View v) {
+            super(v);
+            mContent = (TextView) itemView.findViewById(R.id.id_text);
+            mText = (TextView) itemView.findViewById(R.id.content);
+        }
+    }
+
+//    private Indexable getMessageIndexable(FriendlyMessage ranking) {
 //        PersonBuilder sender = Indexables.personBuilder()
-//                .setIsSelf(mUsername.equals(friendlyMessage.getName()))
-//                .setName(friendlyMessage.getName())
-//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId() + "/sender"));
+//                .setIsSelf(mUsername.equals(ranking.getName()))
+//                .setName(ranking.getName())
+//                .setUrl(MESSAGE_URL.concat(ranking.getId() + "/sender"));
 //
 //        PersonBuilder recipient = Indexables.personBuilder()
 //                .setName(mUsername)
-//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId() + "/recipient"));
+//                .setUrl(MESSAGE_URL.concat(ranking.getId() + "/recipient"));
 //
 //        Indexable messageToIndex = Indexables.messageBuilder()
-//                .setName(friendlyMessage.getText())
-//                .setUrl(MESSAGE_URL.concat(friendlyMessage.getId()))
+//                .setName(ranking.getText())
+//                .setUrl(MESSAGE_URL.concat(ranking.getId()))
 //                .setSender(sender)
 //                .setRecipient(recipient)
 //                .build();

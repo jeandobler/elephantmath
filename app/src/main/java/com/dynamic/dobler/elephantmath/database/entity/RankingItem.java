@@ -19,6 +19,10 @@ public class RankingItem {
 
     private boolean isCorrect;
 
+    public RankingItem() {
+
+    }
+
     public RankingItem(int number1, int number2, float speed, boolean isCorrect) {
         this.number1 = number1;
         this.number2 = number2;
