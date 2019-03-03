@@ -184,7 +184,7 @@ public class ChallengeActivity extends BaseActivity {
         }
         mTvProblem.setText("u Loose");
         mRanking.setRankingItems(mRankingItems);
-        mRanking.setPoints(mPoints);
+        mRanking.setPoints(-mPoints);
         mFirebaseDatabaseReference.child("ranking")
                 .push().setValue(mRanking);
 

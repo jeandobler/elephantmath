@@ -1,7 +1,6 @@
 package com.dynamic.dobler.elephantmath.activity.ranking;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +8,15 @@ import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
 import com.dynamic.dobler.elephantmath.activity.BaseActivity;
+import com.dynamic.dobler.elephantmath.database.converter.DateConverter;
 import com.dynamic.dobler.elephantmath.database.entity.Ranking;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +51,6 @@ public class ItemListActivity extends BaseActivity {
 
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-
         if (findViewById(R.id.item_detail_container) != null) {
             mTwoPane = true;
         }
@@ -71,42 +66,9 @@ public class ItemListActivity extends BaseActivity {
         mRvRanking.setHasFixedSize(true);
 
 
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        DatabaseReference query = mFirebaseDatabaseReference.child("ranking")
-                .orderByChild("email")
-                .equalTo("jedobler@gmail.com","email")
-                .getRef();
-
-
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-            // ...
-        });
+        Query query = mFirebaseDatabaseReference
+                .child("ranking")
+                .orderByChild("points");
 
 
         SnapshotParser<Ranking> parser = dataSnapshot -> {
@@ -122,7 +84,7 @@ public class ItemListActivity extends BaseActivity {
                         .setQuery(query, parser)
                         .build();
 
-        Log.e("OptionReference", query.toString());
+
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(options) {
 
             @Override
@@ -137,19 +99,12 @@ public class ItemListActivity extends BaseActivity {
                                             Ranking ranking) {
 
 
-                Log.e("Ranking", ranking.toString());
-
-//                Log.e("Error", "asd");
                 if (ranking.getPoints() != null) {
-                    viewHolder.mText.setText(ranking.getPoints().toString());
-                    viewHolder.mContent.setText(ranking.getEmail());
+                    viewHolder.mTvRankingPoints.setText(ranking.getPoints().toString());
+                    viewHolder.mTvRankingDate.setText(DateConverter.toNormalDate(ranking.getCreatedAt()));
                 } else {
-
+//                    empty
                 }
-
-
-                // log a view action on it
-//                FirebaseUserActions.getInstance().end(getMessageViewAction(ranking));
             }
         };
 
@@ -170,14 +125,14 @@ public class ItemListActivity extends BaseActivity {
     }
 
     public static class RankingViewHolder extends RecyclerView.ViewHolder {
-        TextView mContent;
-        TextView mText;
+        TextView mTvRankingDate;
+        TextView mTvRankingPoints;
 
 
         public RankingViewHolder(View v) {
             super(v);
-            mContent = (TextView) itemView.findViewById(R.id.id_text);
-            mText = (TextView) itemView.findViewById(R.id.content);
+            mTvRankingPoints = (TextView) itemView.findViewById(R.id.tv_ranking_points);
+            mTvRankingDate = (TextView) itemView.findViewById(R.id.tv_ranking_date);
         }
     }
 

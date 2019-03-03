@@ -34,7 +34,7 @@ public class BaseActivity extends AppCompatActivity {
                 Intent splashIntent = new Intent(this, SplashActivity.class);
                 startActivity(splashIntent);
             } else {
-                this.mGoogleId = account.getEmail();
+                this.mGoogleId = account.getDisplayName();
 
             }
         }
