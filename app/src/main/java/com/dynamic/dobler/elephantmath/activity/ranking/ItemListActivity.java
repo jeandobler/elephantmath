@@ -1,5 +1,7 @@
 package com.dynamic.dobler.elephantmath.activity.ranking;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class ItemListActivity extends BaseActivity {
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.tbRankingItems)
     Toolbar toolbar;
 
     @BindView(R.id.rv_ranking_list)
@@ -41,7 +43,7 @@ public class ItemListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+        setContentView(R.layout.activity_ranking_list);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -61,7 +63,6 @@ public class ItemListActivity extends BaseActivity {
     private void setupRecyclerView() {
 
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setStackFromEnd(true);
         mRvRanking.setLayoutManager(mLinearLayoutManager);
         mRvRanking.setHasFixedSize(true);
 
@@ -87,21 +88,48 @@ public class ItemListActivity extends BaseActivity {
 
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Ranking, RankingViewHolder>(options) {
 
+            private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Ranking item = (Ranking) view.getTag();
+                    if (mTwoPane) {
+                        Bundle arguments = new Bundle();
+                        arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.getId());
+                        ItemDetailFragment fragment = new ItemDetailFragment();
+                        fragment.setArguments(arguments);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.item_detail_container, fragment)
+                                .commit();
+                    } else {
+                        Context context = view.getContext();
+                        Intent intent = new Intent(context, ItemDetailActivity.class);
+                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.getId());
+
+                        context.startActivity(intent);
+                    }
+                }
+            };
+
             @Override
             public RankingViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new RankingViewHolder(inflater.inflate(R.layout.item_list_content, viewGroup, false));
+                return new RankingViewHolder(inflater.inflate(R.layout.list_ranking, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(final RankingViewHolder viewHolder,
-                                            int position,
+            protected void onBindViewHolder(final RankingViewHolder viewHolder, int position,
                                             Ranking ranking) {
 
 
                 if (ranking.getPoints() != null) {
-                    viewHolder.mTvRankingPoints.setText(ranking.getPoints().toString());
-                    viewHolder.mTvRankingDate.setText(DateConverter.toNormalDate(ranking.getCreatedAt()));
+
+                    String pontsValue = String.valueOf(-1 * ranking.getPoints());
+                    viewHolder.rTvName.setText(ranking.getEmail());
+                    viewHolder.rTvPoints.setText(pontsValue);
+                    viewHolder.rTvDate.setText(DateConverter.toNormalDate(ranking.getCreatedAt()));
+                    viewHolder.itemView.setTag(ranking);
+                    viewHolder.itemView.setOnClickListener(mOnClickListener);
+
                 } else {
 //                    empty
                 }
@@ -125,110 +153,22 @@ public class ItemListActivity extends BaseActivity {
     }
 
     public static class RankingViewHolder extends RecyclerView.ViewHolder {
-        TextView mTvRankingDate;
-        TextView mTvRankingPoints;
+
+        @BindView(R.id.tv_ranking_date)
+        TextView rTvDate;
+
+        @BindView(R.id.tv_ranking_points)
+        TextView rTvPoints;
+
+        @BindView(R.id.tv_ranking_name)
+        TextView rTvName;
 
 
         public RankingViewHolder(View v) {
             super(v);
-            mTvRankingPoints = (TextView) itemView.findViewById(R.id.tv_ranking_points);
-            mTvRankingDate = (TextView) itemView.findViewById(R.id.tv_ranking_date);
-        }
-    }
-
-//    private Indexable getMessageIndexable(FriendlyMessage ranking) {
-//        PersonBuilder sender = Indexables.personBuilder()
-//                .setIsSelf(mUsername.equals(ranking.getName()))
-//                .setName(ranking.getName())
-//                .setUrl(MESSAGE_URL.concat(ranking.getId() + "/sender"));
-//
-//        PersonBuilder recipient = Indexables.personBuilder()
-//                .setName(mUsername)
-//                .setUrl(MESSAGE_URL.concat(ranking.getId() + "/recipient"));
-//
-//        Indexable messageToIndex = Indexables.messageBuilder()
-//                .setName(ranking.getText())
-//                .setUrl(MESSAGE_URL.concat(ranking.getId()))
-//                .setSender(sender)
-//                .setRecipient(recipient)
-//                .build();
-//
-//        return messageToIndex;
-//    }
-
-
-/*
-    public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final ItemListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
-        private final boolean mTwoPane;
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
-                if (mTwoPane) {
-                    Bundle arguments = new Bundle();
-                    arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
-                    ItemDetailFragment fragment = new ItemDetailFragment();
-                    fragment.setArguments(arguments);
-                    mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.item_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, ItemDetailActivity.class);
-                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id);
-
-                    context.startActivity(intent);
-                }
-            }
-        };
-
-        SimpleItemRecyclerViewAdapter(ItemListActivity parent,
-                                      List<DummyContent.DummyItem> items,
-                                      boolean twoPane) {
-            mValues = items;
-            mParentActivity = parent;
-            mTwoPane = twoPane;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
-
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mIdView;
-            final TextView mContentView;
-
-            ViewHolder(View view) {
-                super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
-            }
+            ButterKnife.bind(this, v);
 
         }
     }
-
-
-*/
 
 }
