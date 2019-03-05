@@ -36,21 +36,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 
-    // ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
-    // alternatively, just ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha02'
-    // alternatively, just LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0-alpha02'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02'
-
-    // Room
-    implementation 'androidx.room:room-runtime:2.1.0-alpha04'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0-alpha04'
-
-    // GSON
-    implementation 'com.google.code.gson:gson:2.8.5'
-
     // BUTTERKNIFE
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'

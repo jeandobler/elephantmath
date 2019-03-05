@@ -1,6 +1,7 @@
 package com.dynamic.dobler.elephantmath.activity.ranking;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ItemDetailFragment extends Fragment {
 
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_POINTS = "points";
 
 
     private Ranking mItem;
@@ -53,6 +55,7 @@ public class ItemDetailFragment extends Fragment {
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             ref = database.getReference("ranking/" + getArguments().getString(ARG_ITEM_ID));
 
+            Log.e("Reference","ranking/" + getArguments().getString(ARG_ITEM_ID));
 
         }
     }
@@ -65,16 +68,11 @@ public class ItemDetailFragment extends Fragment {
 
         rankingDetailRecycleView = (RecyclerView) rootView.findViewById(R.id.rv_ranking_detail_list);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         rankingDetailRecycleView.setHasFixedSize(true);
 
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(getContext());
         rankingDetailRecycleView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
-        ;
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,7 +91,7 @@ public class ItemDetailFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                 
+
             }
         });
 

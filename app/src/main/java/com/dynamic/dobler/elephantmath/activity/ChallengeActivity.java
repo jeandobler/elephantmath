@@ -1,5 +1,9 @@
 package com.dynamic.dobler.elephantmath.activity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,8 +17,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
+import com.dynamic.dobler.elephantmath.activity.ranking.ItemDetailActivity;
+import com.dynamic.dobler.elephantmath.activity.ranking.ItemDetailFragment;
 import com.dynamic.dobler.elephantmath.database.entity.Ranking;
 import com.dynamic.dobler.elephantmath.database.entity.RankingItem;
+import com.dynamic.dobler.elephantmath.widget.RankingWidget;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -182,16 +189,44 @@ public class ChallengeActivity extends BaseActivity {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
-        mTvProblem.setText("u Loose");
+        mTvProblem.setText(R.string.game_over);
         mRanking.setRankingItems(mRankingItems);
         mRanking.setPoints(-mPoints);
+        String mGroupId = null;
 
         if (!saved) {
-            mFirebaseDatabaseReference.child("ranking")
-                    .push().setValue(mRanking);
+            DatabaseReference pushedPostRef = mFirebaseDatabaseReference.child("ranking")
+                    .push();
+            mGroupId = pushedPostRef.getKey();
+            pushedPostRef.setValue(mRanking);
+            sendWidgetBroadCast();
+
+            goToRankingList(mGroupId);
             saved = true;
         }
 
+
+
+    }
+
+    private void sendWidgetBroadCast() {
+
+        Intent intent = new Intent(this, RankingWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        int[] ids = AppWidgetManager.getInstance(getApplication())
+                .getAppWidgetIds(new ComponentName(getApplication(), RankingWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
+    }
+
+    private void goToRankingList(String mGroupId) {
+        Context context = this;
+        Intent intent = new Intent(context, ItemDetailActivity.class);
+        Log.e("ReferenceId", mGroupId);
+        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, mGroupId);
+        intent.putExtra(ItemDetailFragment.ARG_POINTS, mRanking.getPoints().toString());
+        context.startActivity(intent);
 
     }
 

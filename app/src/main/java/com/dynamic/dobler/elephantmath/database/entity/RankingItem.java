@@ -1,10 +1,7 @@
 package com.dynamic.dobler.elephantmath.database.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
 
-
-@Entity
 public class RankingItem {
 
     private String id;

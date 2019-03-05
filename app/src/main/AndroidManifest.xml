@@ -9,21 +9,26 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ChallengeActivity">
+        <receiver android:name=".widget.RankingWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ranking_widget_info" />
+        </receiver>
 
-        </activity>
+        <activity android:name=".activity.ChallengeActivity"></activity>
         <activity
             android:name=".activity.ranking.ItemListActivity"
             android:label="@string/title_item_list"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
-
         <activity
             android:name=".activity.ranking.ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -34,19 +39,17 @@
                 android:value="com.dynamic.dobler.elephantmath.activity.ranking.ItemListActivity" />
         </activity>
         <activity android:name=".activity.BaseActivity" />
-
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -95,6 +95,7 @@ public class ItemListActivity extends BaseActivity {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.getId());
+                        arguments.putString(ItemDetailFragment.ARG_POINTS, item.getPoints().toString());
                         ItemDetailFragment fragment = new ItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -104,6 +105,8 @@ public class ItemListActivity extends BaseActivity {
                         Context context = view.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.getId());
+                        intent.putExtra(ItemDetailFragment.ARG_POINTS, item.getPoints().toString());
+
 
                         context.startActivity(intent);
                     }

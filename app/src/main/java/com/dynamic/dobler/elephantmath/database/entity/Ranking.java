@@ -4,12 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.room.Entity;
 
-
-@Entity
 public class Ranking {
-
 
     private String id;
 
