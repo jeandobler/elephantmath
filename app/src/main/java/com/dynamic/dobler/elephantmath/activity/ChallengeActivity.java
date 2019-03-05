@@ -62,6 +62,7 @@ public class ChallengeActivity extends BaseActivity {
     private CountDownTimer mCountDownTimer;
     private MediaPlayer mp;
     private DatabaseReference mFirebaseDatabaseReference;
+    private boolean saved = false;
 //    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>
 //            mFirebaseAdapter;
 
@@ -71,7 +72,6 @@ public class ChallengeActivity extends BaseActivity {
         setContentView(R.layout.activity_challenge);
         ButterKnife.bind(this);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
 
 
     }
@@ -101,7 +101,7 @@ public class ChallengeActivity extends BaseActivity {
     void prepareDatabase() {
 
         Date date = new Date();
-        Log.e(this.mGoogleId,this.mGoogleId);
+        Log.e(this.mGoogleId, this.mGoogleId);
         mRanking = new Ranking(this.mGoogleId, date, 0);
         mRankingItems = new ArrayList<RankingItem>();
 
@@ -185,8 +185,12 @@ public class ChallengeActivity extends BaseActivity {
         mTvProblem.setText("u Loose");
         mRanking.setRankingItems(mRankingItems);
         mRanking.setPoints(-mPoints);
-        mFirebaseDatabaseReference.child("ranking")
-                .push().setValue(mRanking);
+
+        if (!saved) {
+            mFirebaseDatabaseReference.child("ranking")
+                    .push().setValue(mRanking);
+            saved = true;
+        }
 
 
     }
@@ -219,6 +223,7 @@ public class ChallengeActivity extends BaseActivity {
 
 
     }
+
 
     private void progressbarTimer() {
         if (mCountDownTimer != null) {

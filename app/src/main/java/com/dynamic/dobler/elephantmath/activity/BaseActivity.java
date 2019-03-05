@@ -1,6 +1,8 @@
 package com.dynamic.dobler.elephantmath.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -39,5 +41,12 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
     }
+
+    protected boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+
 
 }

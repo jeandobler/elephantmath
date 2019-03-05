@@ -2,7 +2,9 @@ package com.dynamic.dobler.elephantmath.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.dynamic.dobler.elephantmath.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,6 +23,11 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_splash);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -36,12 +43,11 @@ public class SplashActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
+
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+
         }
     }
 
@@ -50,13 +56,10 @@ public class SplashActivity extends BaseActivity {
         try {
             account = completedTask.getResult(ApiException.class);
 
-            // Signed in successfully, show authenticated UI.
             updateUI();
+
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("SplashActivity", "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
+//            updateUI();
         }
     }
 
@@ -65,16 +68,23 @@ public class SplashActivity extends BaseActivity {
         if (account != null) {
             Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
+        } else {
 
+            if (this.isNetworkConnected()) {
+//                Toast.makeText(this, R.string.wrong_account, Toast.LENGTH_SHORT).show();
+                signIn();
+            } else {
+                Toast.makeText(this, R.string.not_connect_splash_exception, Toast.LENGTH_LONG).show();
+            }
         }
-
 
     }
 
-
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        if (mGoogleSignInClient != null) {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }
     }
 
 

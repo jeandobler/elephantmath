@@ -22,5 +22,7 @@
     <string name="number_nine">9</string>
     <string name="btn_clear">Clear</string>
     <string name="btn_backspace">Back</string>
+    <string name="wrong_account">Please Try Again</string>
+    <string name="not_connect_splash_exception">Please Connect to the internet</string>
     <!--End Keyboard-->
 </resources>
