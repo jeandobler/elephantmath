@@ -55,7 +55,6 @@ public class ItemDetailFragment extends Fragment {
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             ref = database.getReference("ranking/" + getArguments().getString(ARG_ITEM_ID));
 
-            Log.e("Reference","ranking/" + getArguments().getString(ARG_ITEM_ID));
 
         }
     }

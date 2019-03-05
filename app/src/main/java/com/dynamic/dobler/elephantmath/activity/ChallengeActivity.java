@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
@@ -108,7 +108,6 @@ public class ChallengeActivity extends BaseActivity {
     void prepareDatabase() {
 
         Date date = new Date();
-        Log.e(this.mGoogleId, this.mGoogleId);
         mRanking = new Ranking(this.mGoogleId, date, 0);
         mRankingItems = new ArrayList<RankingItem>();
 
@@ -202,28 +201,26 @@ public class ChallengeActivity extends BaseActivity {
             sendWidgetBroadCast();
 
             goToRankingList(mGroupId);
+
+
             saved = true;
         }
-
 
 
     }
 
     private void sendWidgetBroadCast() {
-
-        Intent intent = new Intent(this, RankingWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-
-        int[] ids = AppWidgetManager.getInstance(getApplication())
-                .getAppWidgetIds(new ComponentName(getApplication(), RankingWidget.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        sendBroadcast(intent);
+        Context context = this;
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_ranking);
+        ComponentName thisWidget = new ComponentName(context, RankingWidget.class);
+        remoteViews.setTextViewText(R.id.tv_widget2, String.valueOf(mPoints));
+        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
     }
 
     private void goToRankingList(String mGroupId) {
         Context context = this;
         Intent intent = new Intent(context, ItemDetailActivity.class);
-        Log.e("ReferenceId", mGroupId);
         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, mGroupId);
         intent.putExtra(ItemDetailFragment.ARG_POINTS, mRanking.getPoints().toString());
         context.startActivity(intent);
