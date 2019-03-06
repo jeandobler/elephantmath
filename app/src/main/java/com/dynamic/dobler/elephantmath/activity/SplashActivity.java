@@ -1,6 +1,8 @@
 package com.dynamic.dobler.elephantmath.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,7 +16,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
-public class SplashActivity extends BaseActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SplashActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 901;
     private GoogleSignInClient mGoogleSignInClient;
@@ -38,6 +42,11 @@ public class SplashActivity extends BaseActivity {
         signIn();
     }
 
+    protected boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -49,6 +58,7 @@ public class SplashActivity extends BaseActivity {
             handleSignInResult(task);
 
         }
+
     }
 
 
@@ -59,11 +69,15 @@ public class SplashActivity extends BaseActivity {
             updateUI();
 
         } catch (ApiException e) {
-//            updateUI();
+
+            if (this.isNetworkConnected()) {
+                signIn();
+            } else {
+                Toast.makeText(this, R.string.not_connect_splash_exception, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
-    @Override
     protected void updateUI() {
         if (account != null) {
             Intent mainIntent = new Intent(this, MainActivity.class);
@@ -71,7 +85,6 @@ public class SplashActivity extends BaseActivity {
         } else {
 
             if (this.isNetworkConnected()) {
-//                Toast.makeText(this, R.string.wrong_account, Toast.LENGTH_SHORT).show();
                 signIn();
             } else {
                 Toast.makeText(this, R.string.not_connect_splash_exception, Toast.LENGTH_LONG).show();

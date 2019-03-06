@@ -8,6 +8,7 @@
         android:id="@+id/et_challenge_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/write_the_answer_here"
         android:layout_marginBottom="@dimen/containerMargin"
         android:background="@color/primaryColor"
         android:enabled="false"
@@ -22,7 +23,6 @@
         android:textColor="@color/white" />
 
     <TableLayout
-        android:id="@+id/keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"

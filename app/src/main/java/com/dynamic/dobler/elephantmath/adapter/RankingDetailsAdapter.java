@@ -22,17 +22,13 @@ public class RankingDetailsAdapter extends RecyclerView.Adapter<RankingDetailsAd
         mDataset = myDataset;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public RankingDetailsAdapter.RankingDetailsHolder onCreateViewHolder(ViewGroup parent,
                                                                          int viewType) {
-        // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_ranking_details, parent, false);
 
-        RankingDetailsHolder vh = new RankingDetailsHolder(v);
-
-        return vh;
+        return new RankingDetailsHolder(v);
     }
 
     @Override
@@ -48,14 +44,15 @@ public class RankingDetailsAdapter extends RecyclerView.Adapter<RankingDetailsAd
 
         if (mDataset.get(position).isCorrect()) {
             holder.mIvCorrect.setImageResource(R.drawable.correct);
+            holder.mIvCorrect.setContentDescription("Correct");
         } else {
             holder.mIvCorrect.setImageResource(R.drawable.incorrect);
+            holder.mIvCorrect.setContentDescription("Incorrect");
         }
 
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
 

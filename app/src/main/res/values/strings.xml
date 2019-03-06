@@ -4,8 +4,6 @@
     <string name="main_challenge_title">X</string>
 
     <string name="main_ranking_title">Ranking</string>
-    <string name="settings">Settings</string>
-    <string name="title_item_list">Items</string>
     <string name="title_item_detail">Ranking Details</string>
 
 
@@ -25,13 +23,10 @@
     <!--End Keyboard-->
 
 
-    <string name="wrong_account">Please Try Again</string>
     <string name="not_connect_splash_exception">Please Connect to the internet</string>
-    <string name="add_widget">Add widget</string>
     <string name="widget_last_points">0</string>
     <string name="widget_lsta_points_label">Last Points</string>
     <string name="game_over">Game Over</string>
-    <string name="db_name">ranking</string>
     <string name="sharre_ranking_title">Your new Points in ElephantMath</string>
     <string name="share_ranking_text">In Elephant Math i reached a nice pontuation</string>
     <string name="challente_problem_placeholder">5 x 8 =</string>
@@ -44,5 +39,11 @@
     <string name="ranking_name_placeholder">Marina</string>
     <string name="ranking_date_placeholder">04/08/2019</string>
     <string name="result_placeholder">8</string>
+    <string name="x">x</string>
     <string name="equals">=</string>
+    <string name="life_1">life 1</string>
+    <string name="life_3">life 3</string>
+    <string name="life_2">life 2</string>
+    <string name="is_this_correct">Is this Correct?</string>
+    <string name="write_the_answer_here">Write the answer here</string>
 </resources>

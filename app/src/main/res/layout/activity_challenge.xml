@@ -10,7 +10,6 @@
     <include layout="@layout/activity_challenge_game" />
 
     <com.dynamic.dobler.elephantmath.ui.KeyboardView
-        android:id="@+id/kv_challenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/containerMargin"

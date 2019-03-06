@@ -43,7 +43,6 @@
                 android:textSize="@dimen/giantText" />
 
             <TextView
-                android:id="@+id/tv_main_challenge_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_main_challenge_title"
@@ -94,7 +93,6 @@
                 android:src="@drawable/trophy" />
 
             <TextView
-                android:id="@+id/tv_main_ranking_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_main_ranking_title"

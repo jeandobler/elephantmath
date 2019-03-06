@@ -12,6 +12,7 @@
     <ImageView
         android:id="@+id/iv_challenge_heart1"
         android:layout_width="@dimen/heart_width"
+        android:contentDescription="@string/life_1"
         android:layout_height="@dimen/heart_height"
         android:layout_marginTop="@dimen/containerMargin"
         android:layout_marginStart="@dimen/heart_margin"
@@ -22,6 +23,7 @@
     <ImageView
         android:id="@+id/iv_challenge_heart2"
         android:layout_width="@dimen/heart_width"
+        android:contentDescription="@string/life_2"
         android:layout_height="@dimen/heart_height"
         android:layout_marginTop="@dimen/containerMargin"
         android:src="@drawable/heart"
@@ -31,6 +33,7 @@
     <ImageView
         android:id="@+id/iv_challenge_heart3"
         android:layout_width="@dimen/heart_width"
+        android:contentDescription="@string/life_3"
         android:layout_height="@dimen/heart_height"
         android:layout_marginTop="@dimen/containerMargin"
         android:src="@drawable/heart"

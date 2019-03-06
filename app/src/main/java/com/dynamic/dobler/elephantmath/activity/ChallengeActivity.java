@@ -70,8 +70,6 @@ public class ChallengeActivity extends BaseActivity {
     private MediaPlayer mp;
     private DatabaseReference mFirebaseDatabaseReference;
     private boolean saved = false;
-//    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>
-//            mFirebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,14 +150,7 @@ public class ChallengeActivity extends BaseActivity {
         mp = MediaPlayer.create(getApplicationContext(), isCorrect ? R.raw.level_up : R.raw.mktoasty);
 
         mp.start();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                mp.release();
-
-            }
-
-            ;
-        });
+        mp.setOnCompletionListener(MediaPlayer::release);
 
         RankingItem newItem = new RankingItem(mNumber1, mNumber2, (float) progressbarCount / 10, isCorrect);
 
@@ -168,17 +159,20 @@ public class ChallengeActivity extends BaseActivity {
 
     private void startLevel() {
 
-        mTvLevel.setText("x" + String.valueOf(mLevel));
-        mTvLevel.setContentDescription("x" + String.valueOf(mLevel));
+        String levelText = "x" + String.valueOf(mLevel);
+        mTvLevel.setText(levelText);
+        mTvLevel.setContentDescription(levelText);
         mEtKeyboard.setText("");
 
         Random rand = new Random();
 
+
         mNumber1 = rand.nextInt(mLevel > 10 ? mLevel - 2 : 7) + 2;
         mNumber2 = mLevel;
         mResult = mNumber1 * mNumber2;
-        mTvProblem.setText(String.valueOf(mNumber1) + " x " + String.valueOf(mNumber2) + " =");
-        mTvProblem.setContentDescription(String.valueOf(mNumber1) + " x " + String.valueOf(mNumber2) + " =");
+        String problemText = String.valueOf(mNumber1) + " x " + String.valueOf(mNumber2) + " =";
+        mTvProblem.setText(problemText);
+        mTvProblem.setContentDescription(problemText);
 
         progressbarCount = 0;
         progressbarTimer();
@@ -192,9 +186,10 @@ public class ChallengeActivity extends BaseActivity {
         }
         mTvProblem.setText(R.string.game_over);
         mTvProblem.setContentDescription(getString(R.string.game_over));
+        mTvProblem.setTextSize(R.dimen.title5Text);
         mRanking.setRankingItems(mRankingItems);
         mRanking.setPoints(-mPoints);
-        String mGroupId = null;
+        String mGroupId;
 
         if (!saved) {
             DatabaseReference pushedPostRef = mFirebaseDatabaseReference.child("ranking")

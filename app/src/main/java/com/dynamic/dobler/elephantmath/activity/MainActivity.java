@@ -25,19 +25,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mCvRanking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openRanking();
-            }
-        });
+        mCvRanking.setOnClickListener(v -> openRanking());
 
-        mCvChallenge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openChallenge();
-            }
-        });
+        mCvChallenge.setOnClickListener(v -> openChallenge());
 
     }
 

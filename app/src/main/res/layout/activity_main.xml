@@ -17,13 +17,14 @@
         android:layout_marginEnd="@dimen/containerMargin"
         android:background="@color/primaryLightColor"
         android:clickable="true"
-        android:focusable="true"
-
         android:contentDescription="@string/start_game"
+
+        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,7 +45,6 @@
                 android:textSize="@dimen/giantText" />
 
             <TextView
-                android:id="@+id/tv_main_challenge_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_main_challenge_title"
@@ -70,13 +70,14 @@
         android:layout_marginEnd="@dimen/containerMargin"
         android:background="@color/primaryLightColor"
         android:clickable="true"
-        android:focusable="true"
-
         android:contentDescription="@string/see_ranking"
+
+        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_main_challenge">
+        app:layout_constraintTop_toBottomOf="@id/cv_main_challenge"
+        tools:targetApi="lollipop">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -96,7 +97,6 @@
                 android:src="@drawable/trophy" />
 
             <TextView
-                android:id="@+id/tv_main_ranking_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_main_ranking_title"

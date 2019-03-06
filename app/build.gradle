@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        debug {
+            keyAlias 'key0'
+            keyPassword 'anatomia'
+            storeFile file('../keystore/keystore.jks')
+            storePassword 'anatomia'
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.dynamic.dobler.elephantmath"
@@ -10,9 +20,14 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
