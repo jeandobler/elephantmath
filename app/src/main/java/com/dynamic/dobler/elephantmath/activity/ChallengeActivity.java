@@ -169,6 +169,7 @@ public class ChallengeActivity extends BaseActivity {
     private void startLevel() {
 
         mTvLevel.setText("x" + String.valueOf(mLevel));
+        mTvLevel.setContentDescription("x" + String.valueOf(mLevel));
         mEtKeyboard.setText("");
 
         Random rand = new Random();
@@ -177,6 +178,7 @@ public class ChallengeActivity extends BaseActivity {
         mNumber2 = mLevel;
         mResult = mNumber1 * mNumber2;
         mTvProblem.setText(String.valueOf(mNumber1) + " x " + String.valueOf(mNumber2) + " =");
+        mTvProblem.setContentDescription(String.valueOf(mNumber1) + " x " + String.valueOf(mNumber2) + " =");
 
         progressbarCount = 0;
         progressbarTimer();
@@ -189,6 +191,7 @@ public class ChallengeActivity extends BaseActivity {
             mCountDownTimer.cancel();
         }
         mTvProblem.setText(R.string.game_over);
+        mTvProblem.setContentDescription(getString(R.string.game_over));
         mRanking.setRankingItems(mRankingItems);
         mRanking.setPoints(-mPoints);
         String mGroupId = null;
@@ -215,6 +218,8 @@ public class ChallengeActivity extends BaseActivity {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_ranking);
         ComponentName thisWidget = new ComponentName(context, RankingWidget.class);
         remoteViews.setTextViewText(R.id.tv_widget2, String.valueOf(mPoints));
+        remoteViews.setContentDescription(R.id.tv_widget2, String.valueOf(mPoints));
+
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
     }
 

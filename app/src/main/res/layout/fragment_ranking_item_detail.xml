@@ -5,7 +5,7 @@
     style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/containerMargin"
     android:textIsSelectable="true"
     android:text="@string/main_ranking_title"
     tools:context=".activity.ranking.ItemDetailFragment" />

@@ -128,13 +128,17 @@ public class ItemListActivity extends BaseActivity {
 
                     String pontsValue = String.valueOf(-1 * ranking.getPoints());
                     viewHolder.rTvName.setText(ranking.getEmail());
+                    viewHolder.rTvName.setContentDescription(ranking.getEmail());
+
                     viewHolder.rTvPoints.setText(pontsValue);
+                    viewHolder.rTvPoints.setContentDescription(pontsValue);
+
                     viewHolder.rTvDate.setText(DateConverter.toNormalDate(ranking.getCreatedAt()));
+                    viewHolder.rTvDate.setContentDescription(DateConverter.toNormalDate(ranking.getCreatedAt()));
+
                     viewHolder.itemView.setTag(ranking);
                     viewHolder.itemView.setOnClickListener(mOnClickListener);
 
-                } else {
-//                    empty
                 }
             }
         };

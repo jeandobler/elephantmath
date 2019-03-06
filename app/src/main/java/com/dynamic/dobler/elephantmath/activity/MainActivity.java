@@ -2,8 +2,6 @@ package com.dynamic.dobler.elephantmath.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 import com.dynamic.dobler.elephantmath.R;
@@ -53,10 +51,5 @@ public class MainActivity extends BaseActivity {
         startActivity(challengeIntent);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
 
 }

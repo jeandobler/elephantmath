@@ -19,10 +19,17 @@
                 android:resource="@xml/ranking_widget_info" />
         </receiver>
 
-        <activity android:name=".activity.ChallengeActivity"></activity>
+        <activity
+            android:name=".activity.ChallengeActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+
+        </activity>
         <activity
             android:name=".activity.ranking.ItemListActivity"
-            android:label="@string/title_item_list"
+            android:label="@string/main_ranking_title"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

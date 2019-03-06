@@ -2,18 +2,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="@dimen/containerMargin">
 
     <EditText
         android:id="@+id/et_challenge_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/containerMargin"
         android:background="@color/primaryColor"
         android:enabled="false"
         android:textAlignment="center"
         android:fontFamily="@font/indieflower"
-        android:minHeight="48dp"
+        android:minHeight="@dimen/et_challenge_height"
         android:textSize="@dimen/editMathText"
         android:paddingLeft="@dimen/containerMargin"
         android:paddingRight="@dimen/containerMargin"

@@ -6,7 +6,7 @@
     <string name="main_ranking_title">Ranking</string>
     <string name="settings">Settings</string>
     <string name="title_item_list">Items</string>
-    <string name="title_item_detail">Item Detail</string>
+    <string name="title_item_detail">Ranking Details</string>
 
 
     <!--Keyboard-->
@@ -21,16 +21,28 @@
     <string name="number_eight">8</string>
     <string name="number_nine">9</string>
     <string name="btn_clear">Clear</string>
-    <string name="btn_backspace">Back</string>
+    <string name="btn_backspace">Delete</string>
+    <!--End Keyboard-->
+
+
     <string name="wrong_account">Please Try Again</string>
     <string name="not_connect_splash_exception">Please Connect to the internet</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="widget_last_points">0</string>
     <string name="widget_lsta_points_label">Last Points</string>
     <string name="game_over">Game Over</string>
     <string name="db_name">ranking</string>
     <string name="sharre_ranking_title">Your new Points in ElephantMath</string>
-    <string name="share_ranking_text">You reached</string>
-    <!--End Keyboard-->
+    <string name="share_ranking_text">In Elephant Math i reached a nice pontuation</string>
+    <string name="challente_problem_placeholder">5 x 8 =</string>
+    <string name="challenge_level_placeholder">x15</string>
+    <string name="start_game">start game</string>
+    <string name="see_ranking">See Ranking</string>
+    <string name="elephant_math">Elephant Math</string>
+    <string name="points_placeholder">12</string>
+    <string name="how_much_points">How much points</string>
+    <string name="ranking_name_placeholder">Marina</string>
+    <string name="ranking_date_placeholder">04/08/2019</string>
+    <string name="result_placeholder">8</string>
+    <string name="equals">=</string>
 </resources>

@@ -40,8 +40,11 @@ public class RankingDetailsAdapter extends RecyclerView.Adapter<RankingDetailsAd
 
         int result = mDataset.get(position).getNumber1() * mDataset.get(position).getNumber2();
         holder.mTvN1.setText(String.valueOf(mDataset.get(position).getNumber1()));
+        holder.mTvN1.setContentDescription(String.valueOf(mDataset.get(position).getNumber1()));
         holder.mTvN2.setText(String.valueOf(mDataset.get(position).getNumber2()));
+        holder.mTvN2.setContentDescription(String.valueOf(mDataset.get(position).getNumber2()));
         holder.mTvResult.setText(String.valueOf(result));
+        holder.mTvResult.setContentDescription(String.valueOf(result));
 
         if (mDataset.get(position).isCorrect()) {
             holder.mIvCorrect.setImageResource(R.drawable.correct);

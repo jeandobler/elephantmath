@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/indieflower"
-            android:text="Elephant Math"
+            android:text="@string/elephant_math"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="36sp"
+            android:textSize="@dimen/splash_title"
               />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
