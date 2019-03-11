@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -53,7 +54,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
 
@@ -69,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
             updateUI();
 
         } catch (ApiException e) {
-
+            e.printStackTrace();
             if (this.isNetworkConnected()) {
                 signIn();
             } else {

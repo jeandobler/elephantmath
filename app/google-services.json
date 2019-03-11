@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "728928955609-e3ireupdonmv9583qledr6hmth13srva.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dynamic.dobler.elephantmath",
-            "certificate_hash": "9f9cd45c72fa9c8f626afaae50781a4d8def123e"
-          }
-        },
-        {
-          "client_id": "728928955609-jsue44gs0k7paj12gfl5tp61mse6hmk4.apps.googleusercontent.com",
+          "client_id": "728928955609-6g5jb1af3et9uu9e4trvviqnt0s1m0ki.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dynamic.dobler.elephantmath",
             "certificate_hash": "8f3748d07ce22827c5067749c3635c368b69bc1a"
+          }
+        },
+        {
+          "client_id": "728928955609-nuvee9np4a23ac0c02ktaohffotvm3a1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dynamic.dobler.elephantmath",
+            "certificate_hash": "0da56e90c6cbc73c85f359cc5f770b051e4d1797"
           }
         },
         {
@@ -48,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "728928955609-3b2t3mr1md012cdrkkmbf7lnhh46ahq1.apps.googleusercontent.com",
+              "client_id": "728928955609-jtvl35g5jcsa0ro5vt96j088ajdodgl6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
