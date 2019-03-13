@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 import com.dynamic.dobler.elephantmath.R;
 import com.dynamic.dobler.elephantmath.activity.BaseActivity;
+import com.dynamic.dobler.elephantmath.activity.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.ActionBar;
@@ -52,6 +53,13 @@ public class ItemDetailActivity extends BaseActivity {
 
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 
     @Override

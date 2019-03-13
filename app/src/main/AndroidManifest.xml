@@ -21,6 +21,7 @@
 
         <activity
             android:name=".activity.ChallengeActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
