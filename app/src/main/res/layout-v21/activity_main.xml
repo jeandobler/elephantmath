@@ -1,112 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_main_challenge"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/containerMargin"
-        android:layout_marginTop="@dimen/containerMargin"
-        android:layout_marginEnd="@dimen/containerMargin"
-        android:background="@color/primaryLightColor"
-        android:clickable="true"
-        android:focusable="true"
-        android:contentDescription="@string/start_game"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical"
+        tools:context=".activity.MainActivity">
 
-        <RelativeLayout
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_main_challenge"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/containerMargin"
+            android:layout_marginTop="@dimen/containerMargin"
+            android:layout_marginEnd="@dimen/containerMargin"
+            android:background="@color/primaryLightColor"
+            android:clickable="true"
+            android:contentDescription="@string/start_game"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_main_challenge_title"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/card_view_size"
-                android:background="@color/primaryLightColor"
-                android:fontFamily="@font/indieflower"
-                android:gravity="center"
-                android:paddingLeft="@dimen/componentMargin"
-                android:paddingTop="@dimen/componentMargin"
-                android:paddingRight="@dimen/componentMargin"
-                android:text="@string/main_challenge_title"
-                android:textColor="@color/white"
-                android:textSize="@dimen/giantText" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_main_challenge_title"
-                android:gravity="center"
-                android:paddingLeft="@dimen/componentMargin"
-                android:paddingTop="@dimen/componentMargin"
-                android:paddingRight="@dimen/componentMargin"
-                android:paddingBottom="@dimen/componentMargin"
-                android:text="@string/main_challenge_subtitle"
-                android:textSize="@dimen/title5Text" />
+                <TextView
+                    android:id="@+id/tv_main_challenge_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_view_size"
+                    android:background="@color/primaryLightColor"
+                    android:fontFamily="@font/indieflower"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/componentMargin"
+                    android:paddingTop="@dimen/componentMargin"
+                    android:paddingRight="@dimen/componentMargin"
+                    android:text="@string/main_challenge_title"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/giantText" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_challenge_title"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/componentMargin"
+                    android:paddingTop="@dimen/componentMargin"
+                    android:paddingRight="@dimen/componentMargin"
+                    android:paddingBottom="@dimen/componentMargin"
+                    android:text="@string/main_challenge_subtitle"
+                    android:textSize="@dimen/title5Text" />
 
-    </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_main_ranking"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/containerMargin"
-        android:layout_marginTop="@dimen/containerMargin"
-        android:layout_marginEnd="@dimen/containerMargin"
-        android:background="@color/primaryLightColor"
-        android:clickable="true"
-        android:focusable="true"
-        android:contentDescription="@string/see_ranking"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_main_challenge">
-
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_main_ranking"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/containerMargin"
+            android:layout_marginTop="@dimen/containerMargin"
+            android:layout_marginEnd="@dimen/containerMargin"
+            android:background="@color/primaryLightColor"
+            android:clickable="true"
+            android:contentDescription="@string/see_ranking"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_main_challenge">
 
-            <ImageView
-                android:id="@+id/iv_main_ranking_title"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/card_view_size"
-                android:background="@color/primaryLightColor"
-                android:contentDescription="@string/main_ranking_title"
-                android:gravity="center"
-                android:paddingLeft="@dimen/componentMargin"
-                android:paddingTop="@dimen/greatPadding"
-                android:paddingRight="@dimen/componentMargin"
-                android:paddingBottom="@dimen/greatPadding"
-                android:src="@drawable/trophy" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv_main_ranking_title"
-                android:gravity="center"
-                android:paddingLeft="@dimen/componentMargin"
-                android:paddingTop="@dimen/componentMargin"
-                android:paddingRight="@dimen/componentMargin"
-                android:paddingBottom="@dimen/componentMargin"
-                android:text="@string/main_ranking_title"
-                android:textSize="@dimen/title5Text" />
+                <ImageView
+                    android:id="@+id/iv_main_ranking_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_view_size"
+                    android:background="@color/primaryLightColor"
+                    android:contentDescription="@string/main_ranking_title"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/componentMargin"
+                    android:paddingTop="@dimen/greatPadding"
+                    android:paddingRight="@dimen/componentMargin"
+                    android:paddingBottom="@dimen/greatPadding"
+                    android:src="@drawable/trophy" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_main_ranking_title"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/componentMargin"
+                    android:paddingTop="@dimen/componentMargin"
+                    android:paddingRight="@dimen/componentMargin"
+                    android:paddingBottom="@dimen/componentMargin"
+                    android:text="@string/main_ranking_title"
+                    android:textSize="@dimen/title5Text" />
 
-    </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

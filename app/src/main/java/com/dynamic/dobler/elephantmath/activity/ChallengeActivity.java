@@ -116,7 +116,7 @@ public class ChallengeActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        endGame();
+//        endGame();
     }
 
     @Override
