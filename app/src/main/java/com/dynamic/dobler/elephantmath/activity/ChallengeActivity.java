@@ -35,6 +35,15 @@ import butterknife.ButterKnife;
 
 public class ChallengeActivity extends BaseActivity {
 
+    private static final String KEY_LIVES = "KEY_LIVES";
+    private static final String KEY_PROGESS = "KEY_PROGESS";
+    private static final String KEY_LEVEL = "KEY_LEVEL";
+    private static final String KEY_POINTS = "KEY_POINTS";
+    private static final String KEY_NUMBER1 = "KEY_NUMBER1";
+    private static final String KEY_NUMBER2 = "KEY_NUMBER2";
+    private static final String KEY_RESULT = "KEY_RESULT";
+    private static final String KEY_SAVED = "KEY_SAVED";
+
     @BindView(R.id.pb_challenge_timer)
     ProgressBar mPbTimer;
 
@@ -58,6 +67,8 @@ public class ChallengeActivity extends BaseActivity {
 
     List<RankingItem> mRankingItems;
 
+    private MediaPlayer mp;
+    private DatabaseReference mFirebaseDatabaseReference;
 
     private int progressbarCount = 0;
     private int mLives = 3;
@@ -67,8 +78,6 @@ public class ChallengeActivity extends BaseActivity {
     private int mNumber2;
     private int mResult;
     private CountDownTimer mCountDownTimer;
-    private MediaPlayer mp;
-    private DatabaseReference mFirebaseDatabaseReference;
     private boolean saved = false;
 
     @Override
@@ -77,6 +86,19 @@ public class ChallengeActivity extends BaseActivity {
         setContentView(R.layout.activity_challenge);
         ButterKnife.bind(this);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+        if (savedInstanceState != null) {
+            progressbarCount = savedInstanceState.getInt(KEY_PROGESS);
+            mLives = savedInstanceState.getInt(KEY_LIVES);
+            mLevel = savedInstanceState.getInt(KEY_LEVEL);
+            mPoints = savedInstanceState.getInt(KEY_POINTS);
+            mNumber1 = savedInstanceState.getInt(KEY_NUMBER1);
+            mNumber2 = savedInstanceState.getInt(KEY_NUMBER2);
+            mResult = savedInstanceState.getInt(KEY_RESULT);
+            saved = savedInstanceState.getBoolean(KEY_SAVED);
+
+        }
 
 
     }
@@ -112,6 +134,22 @@ public class ChallengeActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Calling the super implementation is very important in this case
+        super.onSaveInstanceState(outState);
+
+
+        outState.putInt(KEY_PROGESS, progressbarCount);
+        outState.putInt(KEY_LIVES, mLives);
+        outState.putInt(KEY_LEVEL, mLevel);
+        outState.putInt(KEY_POINTS, mPoints);
+        outState.putInt(KEY_NUMBER1, mNumber1);
+        outState.putInt(KEY_NUMBER2, mNumber2);
+        outState.putInt(KEY_RESULT, mResult);
+        outState.putBoolean(KEY_SAVED, saved);
+    }
+
     void observeChallengeEditText() {
         mEtKeyboard.addTextChangedListener(new TextWatcher() {
             @Override
@@ -126,7 +164,7 @@ public class ChallengeActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals(String.valueOf(mResult))) {
                     mPoints++;
-                    if (mPoints % 6 == 0) {
+                    if (mPoints % 3 == 0) {
                         mLevel++;
                         if (mLives < 3) {
                             mLives++;
