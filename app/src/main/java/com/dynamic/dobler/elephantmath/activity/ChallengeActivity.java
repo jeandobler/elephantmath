@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,7 +70,6 @@ public class ChallengeActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         if (!mModel.mStarTed) {
-            Log.e(TAG, "Start");
             prepareDatabase();
             startLevel();
             mModel.mStarTed = true;
@@ -85,17 +83,20 @@ public class ChallengeActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        if (mModel.mCountDownTimer != null) {
+            mModel.mCountDownTimer.cancel();
+        }
+
         if (mModel.mp != null) {
             mModel.mp.release();
         }
 
-        Log.e(TAG, "Paused");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e(TAG, "Stop");
     }
 
     @Override
@@ -106,7 +107,6 @@ public class ChallengeActivity extends BaseActivity {
 
     void prepareDatabase() {
         Date date = new Date();
-        Log.e(TAG, "PRepare");
         mModel.mRanking = new Ranking(this.mGoogleId, date, 0);
         mModel.mRankingItems = new ArrayList<RankingItem>();
     }
@@ -213,6 +213,7 @@ public class ChallengeActivity extends BaseActivity {
 
 
     }
+
 
     private void sendWidgetBroadCast() {
         Context context = this;

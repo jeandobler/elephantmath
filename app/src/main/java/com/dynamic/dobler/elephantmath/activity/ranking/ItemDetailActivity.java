@@ -3,6 +3,7 @@ package com.dynamic.dobler.elephantmath.activity.ranking;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dynamic.dobler.elephantmath.R;
 import com.dynamic.dobler.elephantmath.activity.MainActivity;
@@ -23,6 +24,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     FloatingActionButton fab;
     private String mPoints;
     private String mId;
+    private String TAG = "ItemDetailActivity";
     private String KEY_POINTS = "KEY_POINTS";
     private String KEY_ID = "KEY_ID";
 
@@ -33,13 +35,19 @@ public class ItemDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-
-        // Show the Up button in the action bar.
+//        // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
 
+            }
+        });
 
         if (savedInstanceState == null) {
 
@@ -88,9 +96,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        super.onBackPressed();
     }
 
     @Override

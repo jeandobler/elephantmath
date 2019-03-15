@@ -24,7 +24,7 @@ public class ChallengeViewModel extends ViewModel {
 
     public int timerMs = 10000;
     public int progressbarCount = 0;
-    public int mLives = 1;
+    public int mLives = 3;
     public int mLevel = 2;
     public int mPoints = 0;
     public int mNumber1;
