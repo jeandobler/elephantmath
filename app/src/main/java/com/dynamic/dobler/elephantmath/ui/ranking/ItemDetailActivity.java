@@ -1,4 +1,4 @@
-package com.dynamic.dobler.elephantmath.activity.ranking;
+package com.dynamic.dobler.elephantmath.ui.ranking;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dynamic.dobler.elephantmath.R;
-import com.dynamic.dobler.elephantmath.activity.MainActivity;
+import com.dynamic.dobler.elephantmath.ui.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.ActionBar;

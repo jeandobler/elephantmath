@@ -20,35 +20,35 @@
         </receiver>
 
         <activity
-            android:name=".activity.ChallengeActivity"
-            android:parentActivityName=".activity.MainActivity">
+            android:name=".ui.ChallengeActivity"
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".ui.MainActivity" />
 
         </activity>
         <activity
-            android:name=".activity.ranking.ItemListActivity"
+            android:name=".ui.ranking.ItemListActivity"
             android:label="@string/main_ranking_title"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".ui.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.ranking.ItemDetailActivity"
+            android:name=".ui.ranking.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dynamic.dobler.elephantmath.activity.MainActivity" />
+                android:value="com.dynamic.dobler.elephantmath.ui.MainActivity" />
         </activity>
 
-        <activity android:name=".activity.BaseActivity" />
+        <activity android:name=".ui.BaseActivity" />
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -56,7 +56,7 @@
 
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

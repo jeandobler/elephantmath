@@ -8,4 +8,4 @@
     android:padding="@dimen/containerMargin"
     android:textIsSelectable="true"
     android:text="@string/main_ranking_title"
-    tools:context=".activity.ranking.ItemDetailFragment" />
+    tools:context=".ui.ranking.ItemDetailFragment" />

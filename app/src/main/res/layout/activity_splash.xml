@@ -7,7 +7,7 @@
     android:background="@color/primaryColor"
     android:fitsSystemWindows="true"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    tools:context=".activity.SplashActivity">
+    tools:context=".ui.SplashActivity">
 
 
 

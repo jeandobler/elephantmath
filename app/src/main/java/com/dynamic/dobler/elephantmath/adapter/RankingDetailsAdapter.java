@@ -34,11 +34,11 @@ public class RankingDetailsAdapter extends RecyclerView.Adapter<RankingDetailsAd
     @Override
     public void onBindViewHolder(RankingDetailsHolder holder, int position) {
 
-        int result = mDataset.get(position).getNumber1() * mDataset.get(position).getNumber2();
-        holder.mTvN1.setText(String.valueOf(mDataset.get(position).getNumber1()));
-        holder.mTvN1.setContentDescription(String.valueOf(mDataset.get(position).getNumber1()));
-        holder.mTvN2.setText(String.valueOf(mDataset.get(position).getNumber2()));
-        holder.mTvN2.setContentDescription(String.valueOf(mDataset.get(position).getNumber2()));
+        int result = mDataset.get(position).number1 * mDataset.get(position).number2;
+        holder.mTvN1.setText(String.valueOf(mDataset.get(position).number1));
+        holder.mTvN1.setContentDescription(String.valueOf(mDataset.get(position).number1));
+        holder.mTvN2.setText(String.valueOf(mDataset.get(position).number2));
+        holder.mTvN2.setContentDescription(String.valueOf(mDataset.get(position).number2));
         holder.mTvResult.setText(String.valueOf(result));
         holder.mTvResult.setContentDescription(String.valueOf(result));
 

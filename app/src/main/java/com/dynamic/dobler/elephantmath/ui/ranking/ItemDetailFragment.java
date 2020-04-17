@@ -1,4 +1,4 @@
-package com.dynamic.dobler.elephantmath.activity.ranking;
+package com.dynamic.dobler.elephantmath.ui.ranking;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,10 +79,10 @@ public class ItemDetailFragment extends Fragment {
                 mItem = dataSnapshot.getValue(Ranking.class);
 //                ((TextView) rootView.findViewById(R.id.tv_ranking_detail)).setText(mItem.getEmail());
 
-                mRankingDetailsAdapter = new RankingDetailsAdapter(mItem.getRankingItems());
+                mRankingDetailsAdapter = new RankingDetailsAdapter(mItem.rankingItems);
                 rankingDetailRecycleView.setAdapter(mRankingDetailsAdapter);
                 if (appBarLayout != null) {
-                    appBarLayout.setTitle(mItem.getEmail());
+                    appBarLayout.setTitle(mItem.email);
 
                 }
 

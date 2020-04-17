@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ChallengeActivity">
+    tools:context=".ui.ChallengeActivity">
 
 
     <include layout="@layout/activity_challenge_game" />
 
-    <com.dynamic.dobler.elephantmath.ui.KeyboardView
+    <com.dynamic.dobler.elephantmath.ui.custom.KeyboardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/containerMargin"

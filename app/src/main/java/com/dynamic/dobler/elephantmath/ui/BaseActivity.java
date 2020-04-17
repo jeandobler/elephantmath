@@ -1,10 +1,11 @@
-package com.dynamic.dobler.elephantmath.activity;
+package com.dynamic.dobler.elephantmath.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 
+import com.dynamic.dobler.elephantmath.ui.SplashActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 

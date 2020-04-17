@@ -1,4 +1,4 @@
-package com.dynamic.dobler.elephantmath.activity.ranking;
+package com.dynamic.dobler.elephantmath.ui.ranking;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dynamic.dobler.elephantmath.R;
-import com.dynamic.dobler.elephantmath.activity.BaseActivity;
+import com.dynamic.dobler.elephantmath.ui.BaseActivity;
 import com.dynamic.dobler.elephantmath.database.converter.DateConverter;
 import com.dynamic.dobler.elephantmath.database.entity.Ranking;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -95,7 +95,7 @@ public class ItemListActivity extends BaseActivity {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.getId());
-                        arguments.putString(ItemDetailFragment.ARG_POINTS, item.getPoints().toString());
+                        arguments.putString(ItemDetailFragment.ARG_POINTS, item.points.toString());
                         ItemDetailFragment fragment = new ItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -105,7 +105,7 @@ public class ItemListActivity extends BaseActivity {
                         Context context = view.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
                         intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.getId());
-                        intent.putExtra(ItemDetailFragment.ARG_POINTS, item.getPoints().toString());
+                        intent.putExtra(ItemDetailFragment.ARG_POINTS, item.points.toString());
 
 
                         context.startActivity(intent);
@@ -124,17 +124,17 @@ public class ItemListActivity extends BaseActivity {
                                             Ranking ranking) {
 
 
-                if (ranking.getPoints() != null) {
+                if (ranking.points != null) {
 
-                    String pontsValue = String.valueOf(-1 * ranking.getPoints());
-                    viewHolder.rTvName.setText(ranking.getEmail());
-                    viewHolder.rTvName.setContentDescription(ranking.getEmail());
+                    String pontsValue = String.valueOf(-1 * ranking.points);
+                    viewHolder.rTvName.setText(ranking.email);
+                    viewHolder.rTvName.setContentDescription(ranking.email);
 
                     viewHolder.rTvPoints.setText(pontsValue);
                     viewHolder.rTvPoints.setContentDescription(pontsValue);
 
-                    viewHolder.rTvDate.setText(DateConverter.toNormalDate(ranking.getCreatedAt()));
-                    viewHolder.rTvDate.setContentDescription(DateConverter.toNormalDate(ranking.getCreatedAt()));
+                    viewHolder.rTvDate.setText(DateConverter.toNormalDate(ranking.createdAt));
+                    viewHolder.rTvDate.setContentDescription(DateConverter.toNormalDate(ranking.createdAt));
 
                     viewHolder.itemView.setTag(ranking);
                     viewHolder.itemView.setOnClickListener(mOnClickListener);
